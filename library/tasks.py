@@ -36,7 +36,7 @@ def check_overdue_loans():
             subject="Overdue Loan Notification",
             message=f"You have an overdue book loan on {loan.book.title} that was due on {loan.due_date}. Please return as soon as possible.",
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[loan.member.user.email]
+            recipient_list=[loan.member.user.email],
             fail_silently=False
         )
 
