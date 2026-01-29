@@ -39,5 +39,30 @@ services:
       - web
       - redis
 
+  celery-beat:
+    build: .
+    command: celery -A library_system beat -l info
+    volumes:
+      - .:/code
+    env_file:
+      - .env
+    depends_on:
+      - web
+      - redis
+
+  flower:
+    build: .
+    command: celery -A library_system flower --port 555
+    volumes:
+      - .:/code
+    env_file:
+      - .env
+    ports:
+      - 5555:555
+    depends_on:
+      - web
+      - redis
+
+
 volumes:
   postgres_data:
